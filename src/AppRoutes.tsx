@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import AuthCallBackPage from "./pages/AuthCallBackPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import ManageRestaurantPage from "./pages/ManageRestaurantPage";
 
 function AppRoutes() {
   return (
@@ -27,6 +28,14 @@ function AppRoutes() {
           element={
             <Layout>
               <UserProfilePage />
+            </Layout>
+          }
+        ></Route>
+        <Route
+          path="/manage-restaurant"
+          element={
+            <Layout>
+              <ManageRestaurantPage />
             </Layout>
           }
         ></Route>
