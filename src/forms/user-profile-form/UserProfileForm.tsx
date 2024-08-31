@@ -26,15 +26,17 @@ const formSchema = z.object({
   country: z.string().min(1, "Country is required"),
 });
 
-type UserFormData = z.infer<typeof formSchema>; // using zod framework to automatically determine the type based on the form Schema
+export type UserFormData = z.infer<typeof formSchema>; // using zod framework to automatically determine the type based on the form Schema
 
 type Props = {
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
-  currentUser: User
+  currentUser: User;
+  title?: string;
+  buttonText?: string
 };
 
-const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
+const UserProfileForm = ({ onSave, isLoading, currentUser, title = "User Profile", buttonText = "Submit" }: Props) => {
   const form = useForm<UserFormData>({
     // react hook form library(useForm) with schema(type)
     resolver: zodResolver(formSchema), // options(validations and messages) passing with form schema
@@ -55,7 +57,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
         noValidate
       >
         <div>
-          <h2 className="text-2xl font-bold">User Profile Form</h2>
+          <h2 className="text-2xl font-bold">{title}</h2>
           <FormDescription>
             View and change the profile information here
           </FormDescription>
@@ -133,7 +135,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
           <LoadingButton />
         ) : (
           <Button type="submit" className="bg-orange-500">
-            Submit
+        {buttonText}
           </Button>
         )}
       </form>
